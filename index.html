@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <title>VueJS</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-info">
+    <a class="navbar-brand" href="#">VueJs</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    Technology
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">React</a>
+                    <a class="dropdown-item" href="#">Angular</a>
+
+                </div>
+            </li>
+
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+</nav>
+
+<div id="app">
+
+
+    <main role="main" class="container">
+        <h1 v-bind:style='style'>{{Title()}}</h1>
+        <p>{{Description()}}</p>
+        <h6> compteur : {{compt}}</h6>
+        <button class="btn btn-dark" v-on:click='compt++'> Show</button>
+        <br/>
+
+        <button class="btn btn-success btn-block" v-on:click='ShowMsg($event)'> Show</button>
+        <hr>
+        <div class="row">
+        	<div class="col-md-12">
+               <div style="background: green;width:200px;height: 200px" v-on:mouseover='Rect1' >
+               	
+                 <div style="background: blue;width:100px;height: 100px" v-on:mouseover.stop='Rect2'></div>
+
+
+               </div>
+
+        	 </div>
+        	 <hr>
+        	 <hr>
+<div class="col-md-6 ">
+
+            <h4>{{message}}</h4>
+
+            <ul class="list-group">
+                <li class="list-group-item" v-for="techno in Technology">{{techno}}
+
+                    <button class="btn btn-danger btn-sm " @click="remove(techno)" style="float:right">Remove</button>
+                </li>
+                <li class="list-group-item" v-if="NewTechno">{{NewTechno}}</li>
+
+            </ul>
+
+            <div class="input-group">
+                <input type="text" class="form-control" aria-label="Text input with segmented dropdown button"
+                       v-model="NewTechno">
+                <div class="input-group-append">
+                    <button type="button" class="btn btn-success btn-outline-secondary" @click="New">New</button>
+
+
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-6">
+            <form v-on:submit.prevent="saveData">
+            	<span class="d-block p-2 bg-dark text-white">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Email address</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                           placeholder="Enter email">
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </span>
+            </form>
+        </div>
+
+       
+</div>
+    </main>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<script type="text/javascript">
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: 'Liste Technology',
+
+            Technology: ['Laravel', 'Symfony', 'CakePHP', 'Vuejs', 'ReactJs', 'Angular'],
+            git: '<h6>github</h6>',
+            NewTechno: "",
+            dynamique_id: 'test_id',
+            style: 'color:#4fc08d;text-align:center',
+            Framework: 'VueJs',
+            Desc: 'Vue (pronounced /vjuː/, like view) is a progressive framework for building user interfaces. Unlike other monolithic frameworks, Vue is designed from the ground up to be incrementally adoptable. The core library is focused on the view layer only, and is easy to pick up and integrate with other libraries or existing projects. On the other hand, Vue is also perfectly capable of powering sophisticated Single-Page Applications when used in combination with modern tooling and supporting libraries.',
+            Msg: "Vue Js it's  Js Framwork SPA",
+            compt: 1
+        },
+        methods:
+            {
+                remove: function (techno) {
+                    var index = this.Technology.indexOf(techno)
+                    this.Technology.splice(index, 1)
+                },
+                New: function () {
+                    this.Technology.push(this.NewTechno)
+                    this.NewTechno = ''
+                },
+                Title: function () {
+                    return this.Framework
+                },
+                Description: function () {
+                    return this.Desc
+                },
+                ShowMsg: function (event) {
+                    console.log(event)
+                    alert(this.Msg)
+                },
+                saveData:function(event)
+                {
+                	//event.preventDefault()
+                },
+                Rect1:function()
+
+                {
+                	console.log('rect1 hoverd')
+                },
+                Rect2:function(event)
+
+                {
+                	//event.stopPropagation();
+
+                	console.log('rect2 hoverd')
+                }
+
+            }
+    })
+
+
+</script>
+</body>
+</html>
